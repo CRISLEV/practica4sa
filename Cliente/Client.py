@@ -2,7 +2,7 @@ import threading
 import requests
 import time
 
-from flask import Flask
+from flask import Flask, request
 
 app  = Flask(__name__)
 
@@ -20,7 +20,7 @@ def menu():
         print("         3. Verificar estado de pedido a Repartidor")
         print("         0. Salir.")
 
-        choice = input("    Selecciona una opcion: ")
+        choice = input("    Selecciona una opción: ")
         if choice == "1":
             print("Solicitando pedido...")
             solicitaPedido()
@@ -36,18 +36,26 @@ def menu():
             print("No existe la opcion seleccionada.")
 
 def solicitaPedido():
-    r = requests.get("http://127.0.0.1:4100/recibirPedido");
+    r = requests.get("http://127.0.0.1:4400/service1EBS");
     print(r.text)
 
 def solicitaEstadoRestaurante(coped):
     payload={'codigo':coped}
-    r = requests.post("http://127.0.0.1:4100/informarEstadoCli", json=payload);
+    r = requests.post("http://127.0.0.1:4400/service2EBS", json=payload);
     print(r.text)
 
 def solicitaEstadoRepartidor(coped):
     payload = {'codigo': coped}
-    r = requests.post("http://127.0.0.1:4200/informarEstadoCli", json=payload);
+    r = requests.post("http://127.0.0.1:4400/service3EBS", json=payload);
     print(r.text)
 
 
-startClient();
+#Services
+@app.route('/responseEBS', methods=['POST'])
+def service1():
+    req_data = request.get_json();
+    print(req_data["response"])
+    return "ok!"
+
+if __name__ == "__main__":
+    app.run(startClient(),debug=True, port=4100)

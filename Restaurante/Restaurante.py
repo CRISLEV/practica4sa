@@ -21,7 +21,7 @@ def menu():
         print("         1. Avisar a repartidor que el pedido esta listo.")
         print("         0. Salir.")
 
-        choice = input("Please make a choice: ")
+        choice = input("    Selecciona una opción: ")
 
         if choice == "1":
             coped = input("--> Ingresa código de pedido: ")
@@ -34,7 +34,7 @@ def menu():
 def avisarRepartidorPedidoListo(coped):
     global pedidos
     payload = {'codigo': coped}
-    r = requests.post("http://127.0.0.1:4200/recibirPedidoRestaurante", json=payload)
+    r = requests.post("http://127.0.0.1:4400/service4EBS", json=payload)
     if r.ok:
         for p in pedidos:
             if p['idPedido'] == coped:
@@ -68,6 +68,29 @@ def service2():
             return "******************************\nPedido "+coped+" en estado:"+p['estado']+"\n******************************\n"
     return "No existe pedido"
 
+@app.route('/responseEBSservice4', methods=['POST'])
+def responseEBSservice4():
+    global pedidos
+    req_data = request.get_json();
+    coped = req_data['codigo']
+    for p in pedidos:
+        if p['idPedido'] == coped:
+            p['estado'] = 'ENVIADO'
+    print("***> Se ha enviado el pedido "+coped)
+    print(pedidos)
+    return ("ok!")
+
+@app.route('/marcarPedidoComoEntregado', methods=['POST'])
+def marcarPedidoComoEntregado():
+    global pedidos
+    req_data = request.get_json();
+    coped = req_data['codigo']
+    for p in pedidos:
+        if p['idPedido'] == coped:
+            p['estado'] = 'ENTREGADO'
+    print("***> Se ha entregado el pedido "+coped)
+    print(pedidos)
+    return ("ok!")
 
 if __name__ == "__main__":
-    app.run(start(),debug=True, port=4100)
+    app.run(start(),debug=True, port=4300)

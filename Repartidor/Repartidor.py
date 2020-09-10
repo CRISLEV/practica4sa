@@ -20,7 +20,7 @@ def menu():
         print("         1. Marcar pedido como entregado.")
         print("         0. Salir.")
 
-        choice = input("Please make a choice: ")
+        choice = input("    Selecciona una opción: ")
 
         if choice == "1":
             coped = input("--> Ingresa código de pedido: ")
@@ -31,6 +31,8 @@ def menu():
 
 def marcarPedidoComoEntregado(coped):
     global pedidos
+    payload = {'codigo': coped}
+    r = requests.post("http://127.0.0.1:4400/service5EBS", json=payload)
     for p in pedidos:
         if p['idPedido'] == coped:
             p['estado'] = 'ENTREGADO'
