@@ -1,0 +1,7 @@
+setup.py
+main/Restaurante.py
+main/__init__.py
+practica5_restaurant.egg-info/PKG-INFO
+practica5_restaurant.egg-info/SOURCES.txt
+practica5_restaurant.egg-info/dependency_links.txt
+practica5_restaurant.egg-info/top_level.txt

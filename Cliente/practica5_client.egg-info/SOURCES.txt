@@ -1,0 +1,7 @@
+setup.py
+main/Client.py
+main/__init__.py
+practica5_client.egg-info/PKG-INFO
+practica5_client.egg-info/SOURCES.txt
+practica5_client.egg-info/dependency_links.txt
+practica5_client.egg-info/top_level.txt

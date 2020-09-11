@@ -1,0 +1,9 @@
+MANIFEST.in
+requirements.txt
+setup.py
+main/Repartidor.py
+main/__init__.py
+practica5.egg-info/PKG-INFO
+practica5.egg-info/SOURCES.txt
+practica5.egg-info/dependency_links.txt
+practica5.egg-info/top_level.txt
