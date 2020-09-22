@@ -9,6 +9,12 @@ app  = Flask(__name__)
 contPedidos = 1
 pedidos = []
 
+
+
+def testEsb():
+    return ("Hola, soy el esb.")
+
+
 def start():
     print("Start ESB")
 

@@ -9,6 +9,9 @@ app  = Flask(__name__)
 contPedidos = 1
 pedidos = []
 
+def testRestaurante():
+    return ("Hola, soy el restaurante.")
+
 def start():
     print("Start Restaurant")
     threading.Thread(target=menu).start()
