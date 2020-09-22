@@ -6,6 +6,9 @@ from flask import Flask, request
 
 app  = Flask(__name__)
 
+def testClient():
+    return ("Hola, soy el ciente.")
+
 def startClient():
     print("Start client");
     t1 = threading.Thread(target=menu)
