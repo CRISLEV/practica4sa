@@ -4,9 +4,9 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                dir('C:/Users/Usuario/Documents/Proyectos/SA/practica7'){
+                dir('C:/Users/Usuario/Documents/Proyectos/SA/practica7/Cliente'){
                     echo 'Testing..'
-                    bat 'build.bat'
+                    bat 'coverage run main\\test.py'
                 }
             }
         }
