@@ -6,7 +6,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 cd Cliente
-                coverage run main\test.py
+                coverage run main/test.py
                 coverage report
                 coverage xml
                 rename coverage.xml coverage-client.xml
