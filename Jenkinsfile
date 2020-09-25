@@ -2,42 +2,44 @@ pipeline {
     agent any
     
     stages {
+        stage('Test') {
+            steps {
+                dir('C:/Users/Usuario/Documents/Proyectos/SA/practica7'){
+                    echo 'Testing..'
+                    bat 'cd Cliente'
+                    bat 'C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python38-32\\Scripts\\coverage run main\\test.py'
+                    bat 'C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python38-32\\Scripts\\coverage report'
+                    bat 'C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python38-32\\Scripts\\coverage xml'
+                    bat 'RENAME coverage.xml coverage-client.xml'
+                    bat 'cd ..'
+                    bat 'MOVE Cliente\\coverage-client.xml Reports'
+                    bat 'cd esb'
+                    bat 'C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python38-32\\Scripts\\coverage run main\\test.py'
+                    bat 'C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python38-32\\Scripts\\coverage report'
+                    bat 'C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python38-32\\Scripts\\coverage xml'
+                    bat 'RENAME coverage.xml coverage-esb.xml'
+                    bat 'cd ..'
+                    bat 'MOVE esb\\coverage-esb.xml Reports'
+                    bat 'cd Repartidor'
+                    bat 'C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python38-32\\Scripts\\coverage run main\\test.py'
+                    bat 'C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python38-32\\Scripts\\coverage report'
+                    bat 'C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python38-32\\Scripts\\coverage xml'
+                    bat 'RENAME coverage.xml coverage-repartidor.xml'
+                    bat 'cd ..'
+                    bat 'MOVE Repartidor\\coverage-repartidor.xml Reports'
+                    bat 'cd Restaurante'
+                    bat 'C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python38-32\\Scripts\\coverage run main\\test.py'
+                    bat 'C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python38-32\\Scripts\\coverage report'
+                    bat 'C:\\Users\\Usuario\\AppData\\Local\\Programs\\Python\\Python38-32\\Scripts\\coverage xml'
+                    bat 'RENAME coverage.xml coverage-restaurante.xml'
+                    bat 'cd ..'
+                    bat 'MOVE Restaurante\\coverage-restaurante.xml Reports'
+                }
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building..'
-                cd Cliente
-                coverage run https://github.com/CRISLEV/practica4sa/blob/master/Cliente/main/test.py
-                coverage report
-                coverage xml
-                rename coverage.xml coverage-client.xml
-                cd ..
-                move Cliente/coverage-client.xml Reports
-                cd esb
-                coverage run main/test.py
-                coverage report
-                coverage xml
-                rename coverage.xml coverage-esb.xml
-                cd ..
-                move esb/coverage-esb.xml Reports
-                cd Repartidor
-                coverage run main/test.py
-                coverage report
-                coverage xml
-                rename coverage.xml coverage-repartidor.xml
-                cd ..
-                move Repartidor/coverage-repartidor.xml Reports
-                cd Restaurante
-                coverage run main/test.py
-                coverage report
-                coverage xml
-                rename coverage.xml coverage-restaurante.xml
-                cd ..
-                move Restaurante/coverage-restaurante.xml Reports
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
             }
         }
         stage('Deploy') {
